@@ -25,5 +25,21 @@ from sklearn.preprocessing import StandardScaler
 sc = StandardScaler()
 X = sc.fit_transform(X)
 
+from keras.models import Sequential
+from keras.layers import Dense
+
+classifier = Sequential()
+classifier.add(Dense(output_dim=4, init='uniform', activation='relu', input_dim=7))
+classifier.add(Dense(output_dim=6, init='uniform', activation='relu'))
+classifier.add(Dense(output_dim=1, init="uniform", activation='sigmoid'))
+classifier.compile(optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"])
+classifier.fit(X, y , batch_size=10, nb_epoch=100)
+
+y_pred = classifier.predict(X)
+y_pred = (y_pred>0.5)*1
+
+from sklearn.metrics import confusion_matrix
+cm = confusion_matrix(y, y_pred)
+
 
 
