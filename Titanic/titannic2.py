@@ -63,5 +63,17 @@ from sklearn.preprocessing import StandardScaler
 sc2 = StandardScaler()
 X2 = sc2.fit_transform(X2)
 
+# Predicting
+y_pred = classifier.predict(X2)
+y_pred = (y_pred>0.3)*1
+y_pred = np.insert(y_pred,0,np.arange(892,1310),axis=1)
+np.savetxt('result2.csv', y_pred, delimiter=',', header="PassengerId,Survived",fmt="%i")
+y_joint = np.stack((y_id,y_pred))
+y_joint = np.transpose(y_joint)
+df = pd.DataFrame(y_joint)
+df.columns = ['PassengerId', 'Survived']
+df.to_csv("result2.csv", index=False)
+
+
 
 
