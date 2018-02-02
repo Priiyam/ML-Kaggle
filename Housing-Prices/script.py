@@ -9,10 +9,5 @@ y = np.log(data.SalePrice)
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42, test_size=0.25)
 
-from sklearn.linear_model import LinearRegression #0.02192, 0.204, 
-regressor = LinearRegression()
-regressor.fit(X, y)
-
-y_pred = regressor.predict(X_test)
 
 
