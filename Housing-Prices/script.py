@@ -24,5 +24,15 @@ plt.ylabel('Actual Price')
 plt.title('Linear Regression Model')
 plt.show()
 
+# Test Set
+test = pd.read_csv('test.csv')
+submit = pd.DataFrame()
+submit['Id'] = test.Id
+data2 = test.select_dtypes(include=[np.number]).interpolate().dropna()
+X2 = data2.drop(['Id'], axis=1)
+y_pred_test = np.exp(regressor.predict(X2))
+submit['SalePrice'] = y_pred_test
+submit.to_csv('result2.csv', index=False)
+
 
 
