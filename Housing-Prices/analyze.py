@@ -18,6 +18,21 @@ numeric_features.dtypes
 
 plt.scatter(x=train['GarageArea'], y=np.log(train.SalePrice))
 
+# Outliers can affect a regression model by pulling our estimated regression line further away from 
+# the true population regression line. So, we'll remove those observations from our data. Removing outliers is 
+# an art and a science. 
+
+# Removing outlines for GarageArea
+train = train[train['GarageArea'] < 1200]
+
+# Checking null values
+nulls = pd.DataFrame(train.isnull().sum().sort_values(ascending=False)[:25])
+nulls.columns = ["Null Count"]
+nulls.index.name = "Feature"
+
+# Unique values
+print ("Unique values are:", train.MiscFeature.unique())
+
 
 
 
